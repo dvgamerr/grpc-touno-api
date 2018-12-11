@@ -1,5 +1,6 @@
 import { Raven, debuger } from 'touno.io'
 import bodyParser from 'body-parser'
+import exhentai from '../exhentai.org'
 
 import auth from './auth'
 
@@ -32,13 +33,16 @@ export default (app, server) => {
     res.status(500).json({ error: err.message })
   })
 
-  app.get('*', (req, res) => res.status(500).end())
+  app.get('/api/*', (req, res, next) => () => {
+    res.status(500).end()
+  })
 
   app.get('/status', (req, res) => {
     res.json({ online: true })
   })
 
-  app.use(auth)
+  app.use('/app', auth)
+  app.use('/app/exhentai', exhentai)
 
   app.post('/restart/:password', (req, res) => Raven.Tracking(async () => {
     if (process.env.SERVER_PASSWORD) {
