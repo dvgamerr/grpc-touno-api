@@ -1,5 +1,6 @@
 import serv from '@touno-io/server'
-import auth from './auth'
+import token from './auth'
+import security from './auth/security'
 import exhentai from './server/exhentai.org'
 
 
@@ -13,9 +14,10 @@ serv.create('web.opensource').then(async app => {
     next()
   })
 
-  app.use('/app', auth)
+  app.post('/app', token)
 
-  app.use('/api/exhentai', exhentai)
+  app.use('/api', security)
+  app.use('/api/ex', exhentai)
  
   await app.start()
 }).catch(ex => {
