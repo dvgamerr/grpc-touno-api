@@ -1,27 +1,28 @@
 const { touno } = require('@touno-io/db/schema')
 
 module.exports = {
-  method: 'GET',
+  method: ['GET','POST'],
   path: '/api/resume',
-  handler: async (request, reply) => {
-    const { body } = request.payload
-    const data = { error: null }
+  handler: async (request) => {
     await touno.open()
     const { Resume } = touno.get()
-    if (!Object.keys(body).length) {
-      const resume = await Resume.find({})
+    if (!request.payload) {
+      const data = {}
+      const resume = await Resume.find({}, 'section content', { $sort: { section: 1 } })
       for (const raw of resume) {
         data[raw.section] = raw.content
       }
       if (!resume.length) { throw new Error('Profile is null.') }
+      return data
     } else {
-      for (const key in body) {
+      let ok = 0
+      for (const key in request.payload) {
         const section = await Resume.findOne({ section: key })
         if (!section) { throw new Error(`Resume section ${key} not found.`) }
-        await Resume.updateOne({ section: key }, { $set: { content: body[key], updated: new Date() } })
+        const result = await Resume.updateOne({ section: key }, { $set: { content: request.payload[key], updated: new Date() } })
+        ok += result.ok
       }
+      return { ok }
     }
-    
-    reply(data)
   }
 }

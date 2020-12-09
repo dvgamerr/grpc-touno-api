@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "test": "node test",
-    "dev": "nodemon .",
+    "dev": "env-cmd nodemon .",
     "start": "node .",
     "eslint": "eslint --ext .js,.vue --ignore-path .eslintignore ."
   },
@@ -26,6 +26,7 @@
     "@touno-io/debuger": "^2.3.3"
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "eslint": "^7.15.0",
     "nodemon": "^2.0.6"
   }
