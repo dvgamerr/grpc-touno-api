@@ -23,11 +23,12 @@
   "dependencies": {
     "@hapi/hapi": "^20.0.3",
     "@touno-io/db": "^2.8.1",
-    "@touno-io/debuger": "^2.3.3"
+    "@touno-io/debuger": "^2.4.0",
+    "axios": "^0.21.0"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
-    "eslint": "^7.15.0",
+    "eslint": "^7.16.0",
     "nodemon": "^2.0.6"
   }
 }
