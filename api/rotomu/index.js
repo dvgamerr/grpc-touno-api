@@ -25,20 +25,21 @@ module.exports = {
   method: ['POST'],
   path: '/api/rotomu',
   handler: async (request) => {
-    console.log('request:', typeof request.payload)
     if (!Array.isArray(request.payload.events)) return { statusCode: 400 } 
     if (!Array.isArray(request.payload.events)) return { statusCode: 400 } 
 
     await task.open()
     const { RotomuConfig, PokemonGo } = task.get()
 
+    console.log('events:', request.payload.events.length)
     for await (const { source, message, replyToken } of request.payload.events) {
-      const msg = normalizeText(message.text)
       if (replyTest.includes(replyToken)) continue
 
+      const msg = normalizeText(message.text)
       const id = source.groupId || source.userId
   
       const IsOnline = await RotomuConfig.findOne({ id: id })
+      console.log('IsOnline:', IsOnline, '->>', msg)
       if (PokedexName.includes(msg)) {
         // const profile = await client.getProfile(source.userId)
         if (IsOnline) {
