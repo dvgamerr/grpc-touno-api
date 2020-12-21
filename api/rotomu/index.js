@@ -22,9 +22,11 @@ const PokedexName = [
 const normalizeText = (text) => (text || '').toLowerCase().trim()
 
 module.exports = {
-  method: ['GET','POST'],
+  method: ['POST'],
   path: '/api/rotomu',
   handler: async (request) => {
+    console.log('request:', request.payload)
+    if (!request.payload) return { statusCode: 400 } 
     if (!Array.isArray(request.payload.events)) return { statusCode: 400 } 
     if (!Array.isArray(request.payload.events)) return { statusCode: 400 } 
 
