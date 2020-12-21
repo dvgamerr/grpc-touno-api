@@ -25,8 +25,7 @@ module.exports = {
   method: ['POST'],
   path: '/api/rotomu',
   handler: async (request) => {
-    console.log('request:', request.payload)
-    if (!request.payload) return { statusCode: 400 } 
+    console.log('request:', typeof request.payload.events)
     if (!Array.isArray(request.payload.events)) return { statusCode: 400 } 
     if (!Array.isArray(request.payload.events)) return { statusCode: 400 } 
 
@@ -72,6 +71,6 @@ module.exports = {
         }
       }
     }
-    return { data: {}, statusCode: 400 } 
+    return { data: {}, statusCode: 200 } 
   }
 }
