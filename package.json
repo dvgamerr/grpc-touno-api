@@ -24,8 +24,7 @@
     "@hapi/hapi": "^20.1.0",
     "@touno-io/db": "^2.8.4",
     "@touno-io/debuger": "^2.4.0",
-    "axios": "^0.21.1",
-    "syno": "^2.2.0"
+    "axios": "^0.21.1"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
