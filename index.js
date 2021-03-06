@@ -1,6 +1,11 @@
 const Hapi = require('@hapi/hapi')
+const { touno } = require('@touno-io/db/schema')
+
+
 
 const init = async () => {
+  await touno.open()
+  
   const server = Hapi.server({ port: 3000, host: '0.0.0.0' })
   server.route({ method: 'GET', path: '/health', handler: () => 'OK' })
   server.route(require('./api/resume'))
