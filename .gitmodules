@@ -1,0 +1,3 @@
+[submodule "task/wakatime"]
+	path = task/wakatime
+	url = git@github.com:dvgamerr/task-wakatime.git
