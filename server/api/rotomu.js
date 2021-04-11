@@ -1,4 +1,4 @@
-const FlexPokedex = require('../../flex/pokedex')
+const FlexPokedex = require('../flex/pokedex')
 const { task } = require('@touno-io/db/schema')
 const axios = require('axios')
 

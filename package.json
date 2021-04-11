@@ -21,14 +21,14 @@
   },
   "homepage": "https://github.com/dvgamerr/project-api-touno-io#readme",
   "dependencies": {
-    "@hapi/hapi": "^20.1.0",
-    "@touno-io/db": "^2.9.4",
+    "@touno-io/db": "^2.9.6",
     "@touno-io/debuger": "^2.4.0",
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "fastify": "^3.14.2"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
-    "eslint": "^7.19.0",
+    "eslint": "^7.24.0",
     "nodemon": "^2.0.7"
   }
 }

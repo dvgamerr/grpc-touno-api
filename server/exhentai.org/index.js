@@ -1,9 +1,9 @@
-import express from 'express'
-import main from './main'
+// import express from 'express'
+// import main from './main'
 
-// router: /app/exhentai/
-const router = express.Router()
+// // router: /app/exhentai/
+// const router = express.Router()
 
-router.post('/', main)
+// router.post('/', main)
 
-export default router
+// export default router

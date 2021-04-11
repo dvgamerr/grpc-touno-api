@@ -1,25 +1,30 @@
-const Hapi = require('@hapi/hapi')
+const fastify = require('fastify')({ logger: false })
 const { touno } = require('@touno-io/db/schema')
-
-
+const logger = require('@touno-io/debuger')('GRPC')
 
 const init = async () => {
   await touno.open()
   
-  const server = Hapi.server({ port: 3000, host: '0.0.0.0' })
-  server.route({ method: 'GET', path: '/health', handler: () => 'OK' })
-  server.route(require('./api/resume'))
-  server.route(require('./api/resume/email'))
+  fastify.get('/health', (req, reply) => {
+    const { Resume } = touno.get()
+    Resume.countDocuments((err) => {
+      reply.code(err ? 500 : 200).send(err ? 'FAIL' : 'OK')
+    })
+  })
   
-  server.route(require('./api/rotomu'))
+  fastify.route(require('./server/api/resume'))
+  fastify.route(require('./server/api/rotomu'))
   
-  await server.start()
-  console.log('Server running on %s', server.info.uri)
+  await fastify.listen(3000, '0.0.0.0')
+  console.log('Server running on %s', '0.0.0.0:30000')
 }
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', async (err) => {
   console.error(err)
   process.exit(1)
 })
 
-init()
+init().catch(async ex => {
+  await touno.close()
+  logger.error(ex)
+})
