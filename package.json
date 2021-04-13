@@ -21,10 +21,13 @@
   },
   "homepage": "https://github.com/dvgamerr/project-api-touno-io#readme",
   "dependencies": {
-    "@touno-io/db": "^2.9.6",
+    "@sentry/node": "^6.2.5",
+    "@touno-io/db": "^3.2.0",
     "@touno-io/debuger": "^2.4.0",
     "axios": "^0.21.1",
-    "fastify": "^3.14.2"
+    "axios-retry": "^3.1.9",
+    "fastify": "^3.14.2",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
