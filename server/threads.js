@@ -1,7 +1,9 @@
 const task = require('@touno-io/db/task')
 const { Worker } = require('worker_threads')
 
-module.exports = async (req, taskname, filename, data = {}) => {
+module.exports = async (taskname, filename, data = {}) => {
+  // await task.create('50 7 * * *', 'cinema-dj', 'desc')  
+
   const job = await task.load(taskname)
   if (await job.isRunning()) return { run: async () => {}, state: () => job.getState() }
 

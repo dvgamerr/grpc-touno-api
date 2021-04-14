@@ -16,14 +16,19 @@ const init = async () => {
   fastify.route(require('./server/api/rotomu'))
   fastify.route(require('./server/api/resume'))
   fastify.route(require('./server/api/cron/wakatime'))
+
+  for (const cinema of require('./server/api/cron/cinema')) {
+    fastify.route(cinema)
+  }
   
   await fastify.listen(3000, '0.0.0.0')
-  logger.log('Server running on %s', '0.0.0.0:30000')
+  logger.info('running on :3000')
 }
 
 
 const exitHandler = (err, exitCode) => {
   touno.close()
+  myself.close()
   logger.error(`${exitCode}:Exiting... (${err})`)
   process.exit(0)
 }
