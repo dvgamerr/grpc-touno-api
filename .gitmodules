@@ -1,3 +1,6 @@
 [submodule "task/wakatime"]
 	path = task/wakatime
 	url = git@github.com:dvgamerr/task-wakatime.git
+[submodule "task/cinema"]
+	path = task/cinema
+	url = git@github.com:dvgamerr/task-cinema.git
