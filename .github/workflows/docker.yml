@@ -1,53 +1,53 @@
-name: DockerBuild
+name: Deploy Docker Hub
 
 on:
   push:
-    branches: 
-      - master
-      - main
+    branches: [ master, main ]
     tags:
       - v*
 
 env:
   IMAGE_NAME: api-touno-io
-
+  
 jobs:
   push:
+    name: Build and Deploy
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-
-      - name: SonarQube Scan
-        uses: kitabisa/sonarqube-action@v1.1.0
+      - name: Checkout SourceCode
+        uses: actions/checkout@v2
         with:
-          host: https://sonar.touno.io
-          projectKey: api-touno.io
-          projectVersion: v1.0.0
+          fetch-depth: 0
+
+      - name: SonarScanner Verify
+        uses: docker://sonarsource/sonar-scanner-cli:latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build image
-        run: docker build --tag $IMAGE_NAME .
+        run: docker build . --tag $IMAGE_NAME
 
-      - name: Log into docker.io
-        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u ${{ github.actor }} --password-stdin
-
-      - name: Push image to docker.io
+      - name: Push image
         run: |
           IMAGE_ID=${{ github.actor }}/$IMAGE_NAME
-
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-
           # Use Docker `latest` tag convention
           [ "$VERSION" == "master" ] && VERSION=latest
-
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
-
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
