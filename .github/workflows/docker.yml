@@ -18,7 +18,7 @@ jobs:
           token: ${{ secrets.SUBMODULE_TOKEN  }}
           submodules: recursive
 
-      - name: Set up Docker BuildX     
+      - name: Set up Docker BuildX
         uses: crazy-max/ghaction-docker-buildx@v1     
 
       - name: Log into docker.io
