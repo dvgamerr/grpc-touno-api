@@ -11,7 +11,6 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-18.04
     env:
-      IMAGE_FILE: dockerfile
       IMAGE_NAME: api-touno-io
     steps:
       - uses: actions/checkout@v2.1.0
@@ -45,6 +44,6 @@ jobs:
           docker buildx build \
             --platform linux/arm/v7 \
             --tag ${{ steps.prepare.outputs.image_tags }} \
-            --file $IMAGE_FILE \
+            --file ./Dockerfile \
             --output type=image,push=true .
           
