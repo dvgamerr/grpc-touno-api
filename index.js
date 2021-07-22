@@ -12,7 +12,7 @@ const init = async () => {
       reply.code(err ? 500 : 200).send(err ? 'FAIL' : 'OK')
     })
   })
-  
+  fastify.route(require('./server/api/wakatime/leaderbords'))
   fastify.route(require('./server/api/rotomu'))
   fastify.route(require('./server/api/resume'))
   fastify.route(require('./server/api/cron/wakatime'))
