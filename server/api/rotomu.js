@@ -2,7 +2,7 @@ const FlexPokedex = require('../flex/pokedex')
 const { task } = require('@touno-io/db/schema')
 const axios = require('axios')
 
-const replyBot = (token, text) => axios.put(`${process.env.NOTIFY}rotom/${token}`, typeof text === 'string' ? { type: 'text', text } : text)
+const replyBot = (token, text) => axios.put(`${process.env.NOTIFY}line/rotom/${token}`, typeof text === 'string' ? { type: 'text', text } : text)
 
 const replyTest = [ '00000000000000000000000000000000', 'ffffffffffffffffffffffffffffffff' ]
 
