@@ -1,6 +1,6 @@
 {
   "name": "project-api-touno-io",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Endpoint API for appilication window, linux",
   "main": "index.js",
   "private": true,
