@@ -41,7 +41,6 @@ module.exports = {
       const IsOnline = await RotomuConfig.findOne({ id: id })
       console.log('IsOnline:', IsOnline, '->>', msg)
       if (PokedexName.includes(msg)) {
-        // const profile = await client.getProfile(source.userId)
         if (IsOnline) {
           await replyBot(replyToken, 'ครับ!') // ครับ! ${profile.displayName}`
         } else {

@@ -1,5 +1,5 @@
 const mintify = (text) => {
-  return text.includes('hr') ? text.replace(/.hr(|s) /ig, ':').replace(/min(|s)/ig, 'hr') : text
+  return text.includes('hr') ? text.replace(/.hr(s|) /ig, ':').replace(/min(s|)/ig, 'hr') : text
 }
 
 module.exports = (data) => {

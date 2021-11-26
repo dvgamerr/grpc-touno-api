@@ -1,33 +1,33 @@
 {
-  "name": "project-api-touno-io",
+  "name": "funcless",
   "version": "2.2.4",
   "description": "Endpoint API for appilication window, linux",
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "node test",
     "dev": "env-cmd nodemon .",
     "start": "node .",
     "eslint": "eslint --ext .js,.vue --ignore-path .eslintignore ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dvgamerr/project-api-touno-io.git"
+    "url": "git+git@github.com:dvgamerr/ouno_funcless.git"
   },
   "author": "Mr.Kananek T.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dvgamerr/project-api-touno-io/issues"
+    "url": "https://github.com/dvgamerr/ouno_funcless/issues"
   },
-  "homepage": "https://github.com/dvgamerr/project-api-touno-io#readme",
+  "homepage": "https://github.com/dvgamerr/ouno_funcless#readme",
   "dependencies": {
-    "@sentry/node": "^6.9.0",
+    "@sentry/node": "^6.15.0",
     "@touno-io/db": "^3.2.1",
     "@touno-io/debuger": "^2.4.0",
     "axios": "^0.21.1",
     "axios-retry": "^3.1.9",
     "dayjs": "^1.10.6",
     "fastify": "^3.19.1",
+    "fastify-cors": "^6.0.2",
     "moment": "^2.29.1",
     "numeral": "^2.0.6"
   },

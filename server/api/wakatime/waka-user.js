@@ -1,5 +1,5 @@
 module.exports = (user, stats, rank = 0) => {
-  const data = {
+  return {
     type: 'flex',
     altText: `ยินดีต้อนรับครับ คุณ ${user.display_name}`,
     contents: {
@@ -75,5 +75,4 @@ module.exports = (user, stats, rank = 0) => {
       }
     }
   }
-  return data
 }
